@@ -27,7 +27,10 @@ public class Wget implements Runnable {
             int read = in.read(buff, 0, BUFF_SIZE);
             while (read != -1) {
                 long elapsed = System.nanoTime() - start;
-                Thread.sleep(speed - TimeUnit.MILLISECONDS.convert(elapsed, TimeUnit.NANOSECONDS));
+                long latency = speed - TimeUnit.MILLISECONDS.convert(elapsed, TimeUnit.NANOSECONDS);
+                if (latency > 0) {
+                    Thread.sleep(latency);
+                }
                 out.write(buff, 0, read);
                 start = System.nanoTime();
                 read = in.read(buff, 0, BUFF_SIZE);
