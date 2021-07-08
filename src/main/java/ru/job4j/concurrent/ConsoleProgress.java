@@ -12,7 +12,7 @@ public class ConsoleProgress implements Runnable {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            i = (i == ar.length) ? 0 : ++i;
+            i = (i == ar.length) ? 0 : i + 1;
         }
     }
 
