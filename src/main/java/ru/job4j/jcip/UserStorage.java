@@ -9,19 +9,11 @@ public class UserStorage {
     private final HashMap<Integer, User> map = new HashMap<>();
 
     public synchronized boolean add(User user) {
-        if (map.containsKey(user.getId())){
-            return false;
-        }
-        map.put(user.getId(), user);
-        return true;
+        return map.putIfAbsent(user.getId(), user) != null;
     }
 
     public synchronized boolean update(User user) {
-        if (map.containsKey(user.getId())){
-            map.put(user.getId(), user);
-            return true;
-        }
-        return false;
+        return map.replace(user.getId(), user) != null;
     }
 
     public synchronized boolean delete(User user) {
