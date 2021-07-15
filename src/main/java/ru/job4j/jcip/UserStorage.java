@@ -9,7 +9,7 @@ public class UserStorage {
     private final HashMap<Integer, User> map = new HashMap<>();
 
     public synchronized boolean add(User user) {
-        return map.putIfAbsent(user.getId(), user) != null;
+        return map.putIfAbsent(user.getId(), user) == null;
     }
 
     public synchronized boolean update(User user) {
